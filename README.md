@@ -1,4 +1,4 @@
-# Image
+# Image 
 [![crates.io](https://img.shields.io/crates/v/image.svg)](https://crates.io/crates/image)
 [![Documentation](https://docs.rs/image/badge.svg)](https://docs.rs/image)
 [![Build Status](https://github.com/image-rs/image/workflows/Rust%20CI/badge.svg)](https://github.com/image-rs/image/actions)
