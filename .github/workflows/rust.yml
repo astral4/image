@@ -141,9 +141,14 @@ jobs:
     - uses: dtolnay/rust-toolchain@nightly
     - name: install-deps
       run: sudo apt-get -y install clang llvm
+    - name: install cargo-afl
+      shell: bash
+      run: |
+        if [ ! -f ~/.cargo/bin/cargo-afl ]; then
+          cargo install cargo-afl
+        fi
     - name: build
       run: |
-        cargo install cargo-afl
         cd fuzz-afl
         cargo check --bin reproduce_webp
         cargo check --bin reproduce_pnm
@@ -167,10 +172,14 @@ jobs:
           target/
         key: ${{ runner.os }}-cargo-fuzz-${{ hashFiles('**/Cargo.toml') }}
     - uses: dtolnay/rust-toolchain@nightly
-    - name: build
+    - name: install cargo-fuzz
+      shell: bash
       run: |
-        cargo install cargo-fuzz
-        cargo fuzz build
+        if [ ! -f ~/.cargo/bin/cargo-fuzz ]; then
+          cargo install cargo-fuzz
+        fi
+    - name: build
+      run: cargo fuzz build
     - name: fuzz
       run: |
         for format in $(cargo fuzz list); do
