@@ -148,6 +148,8 @@ jobs:
           cargo install cargo-afl
         fi
     - name: build
+      run: cargo afl config --build
+    - name: fuzz
       run: |
         cd fuzz-afl
         cargo check --bin reproduce_webp
