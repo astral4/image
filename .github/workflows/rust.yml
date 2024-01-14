@@ -147,8 +147,6 @@ jobs:
         if [ ! -f ~/.cargo/bin/cargo-afl ]; then
           cargo install cargo-afl
         fi
-    - name: build
-      run: cargo afl config --build
     - name: fuzz
       run: |
         cd fuzz-afl
