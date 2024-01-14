@@ -129,24 +129,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - uses: actions/cache@v3
-      with:
-        path: |
-          ~/.cargo/bin/
-          ~/.cargo/registry/index/
-          ~/.cargo/registry/cache/
-          ~/.cargo/git/db/
-          target/
-        key: ${{ runner.os }}-cargo-afl-${{ hashFiles('**/Cargo.toml') }}
     - uses: dtolnay/rust-toolchain@nightly
     - name: install-deps
       run: sudo apt-get -y install clang llvm
     - name: install cargo-afl
-      shell: bash
-      run: |
-        if [ ! -f ~/.cargo/bin/cargo-afl ]; then
-          cargo install cargo-afl
-        fi
+      run: cargo install cargo-afl
     - name: fuzz
       run: |
         cd fuzz-afl
@@ -178,8 +165,6 @@ jobs:
         if [ ! -f ~/.cargo/bin/cargo-fuzz ]; then
           cargo install cargo-fuzz
         fi
-    - name: build
-      run: cargo fuzz build
     - name: fuzz
       run: |
         for format in $(cargo fuzz list); do
