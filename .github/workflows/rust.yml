@@ -3,9 +3,9 @@ name: Rust CI
 on:
   workflow_dispatch:
   push:
-    branches: [ master, main, next ]
+    branches: [ master, main, next, fuzzing-target-cache ]
   pull_request:
-    branches: [ master, main, next ]
+    branches: [ master, main, next, fuzzing-target-cache ]
   schedule:
     - cron: '5 16 * * 6'
 
