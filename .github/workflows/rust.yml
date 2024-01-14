@@ -169,7 +169,7 @@ jobs:
     - name: fuzz
       run: |
         for format in $(cargo fuzz list); do
-          cargo fuzz run "$format" -- -runs=0;
+          RUSTFLAGS="-C codegen-units=16" cargo fuzz run "$format" -- -runs=0;
         done
 
   public_private_dependencies:
